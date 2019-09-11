@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Assignment</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+  <style>
+    body{
+      padding-left: 20px;
+    }
+    h2.question {
+    font-size: 16px;
+    padding: 20px 0; 
+    color: brown;
+}
+section{
+  padding: 10px 20px;
+  border-bottom: 1px solid #000000;
+}
+  </style>
+</head>
+<body ng-app="assignmentApp">
+<section>
+  <h2 class="question">1.Difference between ‘this’ and ‘let’ and when to use what, explain with examples.</h2>
+  <div class="answer">
+      this : 
+    This Keyword useually returns the current object. The value of "this" contains based on place of useuage. 
+    For example : 
+       <pre>
+
+       
+       class appComponent {  
+           constructor(){
+
+           }
+           console.log(this);
+           // It will contains all the properties of class
+       }
+      </pre>
+
+      <pre>
+       $("button").click(function(){
+           console.log(this);
+           // It will contains only the properties current clicked button
+       });
+      </pre>
+
+
+Let : 
+    Let keyword alternative useage for "var" in ES2015/16. Compared to "var", it has many features mentioned below:
+        <br>1. Block Level Scope. (The scope is available inside {} braces)
+           Example : 
+           <pre>
+
+           
+             {
+                 let a =1;
+                 var b =1;
+             }
+             console.log(a); // print -> Error
+             console.log(b); // print -> 1
+            </pre>
+        2. Declaraion Safty : Redeclaration will thorows error where as "var" will allow redeclaraion.
+
+  </div>
+</section>
+<section>
+    <h2 class="question">2. Write a function which accepts an array of strings and returns a map of character to count of the character(including spaces and special characters). 
+      </h2>
+    <div class="answer">
+
+Program : <br>
+<pre>
+function findCountofChars(arr) {
+  let result={};
+   for (let i = 0; i < arr.length; i++) { 
+    for (let ii = 0; ii < arr[i].length; ii++) {
+      //console.log(arr[i].charAt(ii));
+       if(result[arr[i].charAt(ii)] == undefined ){
+       	result[arr[i].charAt(ii)]=1;
+       }else{
+       	result[arr[i].charAt(ii)] +=1;
+       } 
+     }
+    };  
+  console.log(result,"++++");
+  return result;
+}
+
+var inputArray = ['hell@o world1212', 'hello','add'];
+findCountofChars(inputArray);
+</pre>
+<pre>
+Output : 
+
+{ 
+    " ": 1
+    1: 2
+    2: 2
+    @: 1
+    a: 1
+    d: 3
+    e: 2
+    h: 2
+    l: 5
+    o: 3
+    r: 1
+    w: 1
+}</pre>
+    </div>
+</section>
+ 
+<section>
+    <h2 class="question">
+        3. Write a function to return all the keys present in an object at any level.</h2>
+
+    <div class="answer">
+      <pre>
+        var inputArray = {
+          a: 5,
+          b: {
+            c: {
+              d: 10
+            }
+          },
+          e: 10,
+          f: {
+            g: {
+              h: {
+                i: {
+                  j: 30
+                }
+              }
+            }
+          }
+        };
+        var result = [];
+        
+         function recursiveFun(inputArray) {
+          for (var key in inputArray) {
+            result.push(key);
+            // console.log(key, inputArray[key]);
+            if (typeof(inputArray[key]) == 'object') {
+              recursiveFun(inputArray[key])
+            }
+          }
+          return result;
+        }
+        var finalResult = recursiveFun(inputArray);
+        console.log(finalResult)
+      </pre>
+
+      
+        Output : 
+      </pre>
+        ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"] </pre>
+    </div>
+</section>
+<section>
+    <h2 class="question"> 
+        4.       Write a function to reverse every word of a string.<br>
+
+        ·         Using split and reverse<br>
+        
+        ·         Without using split and reverse and in O(1) space (since strings are immutable, assume that the input is a character array).
+
+        
+    </h2>
+    <div class="answer">
+
+
+<i>Using Split & Reverse :</i>
+
+
+Program :
+<pre>
+var givenInput="Hello World";
+revertheString(givenInput);
+
+function revertheString(input) {
+  var result = '';
+  if (input && input != '') {
+    var arrFormat = input.split('');
+    arrFormat = arrFormat.reverse();
+    //console.log(arrFormat)
+    for (var i = 0; i < arrFormat.length; i++) {
+      result += arrFormat[i];
+    }
+    console.log(result);
+    return result
+  } else {
+    alert("Please check the input")
+  }
+
+}</pre>
+
+Output :
+<pre>
+    dlroW olleH
+</pre>
+
+
+<br><br>
+<i>Without using Split & Reverse</i>
+
+<pre>
+
+
+var givenInput="Hell@@@ sdsdo World";
+revertheString(givenInput);
+
+function revertheString(input) {
+  var result = '';
+  if (input && input != '') {  
+    for (var i = input.length-1; i >=0; i--) {
+      result += input.charAt(i);
+    }
+    console.log(result);
+    return result
+  } else {
+    alert("Please check the input")
+  } 
+}  
+</pre>
+
+Output :
+<pre>
+
+
+dlroW odsds @@@lleH
+</pre>
+
+
+    </div>
+</section>
+
+
+
+<section>
+  <h2 class="question">
+
+  5. Write a function to remove duplicate strings from an array of strings.
+  </h2>
+  <div class="answer">
+
+      Program : 
+
+      <pre>
+      var inputArray = ['adw', 'bdd','b','c', 'adw', 'b']
+      var result = [];
+      
+      function duplicateRemove(inputArray) {
+        inputArray.forEach((key) => {
+          if (result.includes(key) === false) {
+            result.push(key);
+          }
+        }) 
+        return result;
+      }
+      var finalResult = duplicateRemove(inputArray);
+      console.log(finalResult)
+    </pre>
+      Output :
+      <pre>
+
+      
+      ["adw", "bdd", "b", "c"]
+    </pre>
+      
+      
+  </div>
+</section>
+
+  
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+   angular.module('assignmentApp',[]);
+  </script>
+    
+
+
+  </body>
+</html>
+
